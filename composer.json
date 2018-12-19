@@ -1,0 +1,17 @@
+{
+    "name": "millancore/plase",
+    "description": "PlaSE - Payment Library to connect to PSE",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Juan Millan",
+            "email": "juanes14569@hotmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": { "Plase\\": "src/" }
+    }
+}
