@@ -13,9 +13,15 @@ class RequestBuilder implements RequestBuilderInterface
     private $rawRequest;
     private $fields;
 
-    public function __construct(Array $data)
+    public function __construct(array $data = [])
     {
+        if (!empty($data)) {
+            $this->setData($data);
+        }
+    }
 
+    private function setData($data)
+    {
         $this->fields = [
             'bankCode',
             'bankInterface',
@@ -41,8 +47,12 @@ class RequestBuilder implements RequestBuilderInterface
         foreach ($this->fields as $propierty) {
             $this->{$propierty}($data[$propierty]);
         };
-
     }
+
+    public static function create()
+    {
+        return new static();
+    } 
 
     public function bankCode($bankCode)
     {
@@ -97,14 +107,14 @@ class RequestBuilder implements RequestBuilderInterface
         return $this;
     }
 
-    public function language(String $language) 
+    public function language(String $language)
     {
         $language = \Plase\Value\Language::fromString($language)->get();
         $this->rawRequest['language'] = $language;
         return $this;
     }
 
-    public function currency(String $currency) 
+    public function currency(String $currency)
     {
         $currency = \Plase\Value\Currency::fromString($currency)->get();
         $this->rawRequest['currency'] = $currency;
@@ -113,18 +123,18 @@ class RequestBuilder implements RequestBuilderInterface
 
     public function totalAmount(Float $totalAmount)
     {
-       $this->rawRequest['totalAmount'] = $totalAmount;   
+        $this->rawRequest['totalAmount'] = $totalAmount;
     }
 
     public function taxAmount(Float $taxAmount)
     {
-       $this->rawRequest['taxAmount'] = $taxAmount;   
+        $this->rawRequest['taxAmount'] = $taxAmount;
     }
 
     public function devolutionBase(Float $devolutionBase)
     {
-       $this->rawRequest['devolutionBase'] = $devolutionBase;   
-    } 
+        $this->rawRequest['devolutionBase'] = $devolutionBase;
+    }
 
     public function tipAmount(Float $tipAmount)
     {
@@ -167,13 +177,12 @@ class RequestBuilder implements RequestBuilderInterface
         return $this;
     }
 
-    public function additionalData(Array $attribute)
+    public function additionalData(array $attribute)
     {
         $attribute = \Plase\Entity\Attribute::fromArray($attribute);
 
         $this->rawRequest['additionalData'][] = $attribute->toArray();
         return $this;
-        
     }
 
     public function getRawRequest()
@@ -186,4 +195,3 @@ class RequestBuilder implements RequestBuilderInterface
         return new PSERequest($this);
     }
 }
- 

@@ -39,7 +39,7 @@ $payer = new Person([
         'mobile' => '212-474-4638 x541',
 ]);
 ```
-### Create a new resquest with ResquestBuilder
+### Create a new resquest with ResquestBuilder in one step
 
 ```php
 use Plase\RequestBuilder;
@@ -56,9 +56,9 @@ $builder = new RequestBuilder([
         'taxAmount' => 2202855.15,
         'devolutionBase' => 1854213.41,
         'tipAmount' => 82.95,
-        'payer' => Person::class,
-        'buyer' => Person::class,
-        'shipping' => Person::class,
+        'payer' => Person Object,
+        'buyer' => Person Object,
+        'shipping' => Person Object,
         'ipAddress' => '37.49.34.76',
         'userAgent' => 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/5311 (KHTML, like Gecko) Chrome/37.0.862.0 Mobile Safari/5311',
         'additionalData' => ['name' => 'code', 'value' => 312321]
@@ -67,6 +67,22 @@ $builder = new RequestBuilder([
 $transaction = $plase->addTransaction(
         $builder->getRequest()
     )->send();
+```
+
+### ResquestBuilder step by step
+
+```php
+$builder = new RequestBuilder();
+
+$request = RequestBuilder::create()
+                ->bankCode(41231)
+                ->bankInterface(1)
+                ->returnURL('https://gateway.com/payment')
+                ->payer(Person Object)
+                ...
+                ->getResquest();
+
+$transaction = $plase->addTransaction($request)->send();
 ```
 
 ## PlaSE Integrated in laravel
