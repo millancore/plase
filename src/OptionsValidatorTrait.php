@@ -4,12 +4,16 @@ namespace Plase;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class OptionsValidator
+trait OptionsValidatorTrait
 {
-    public static function resolve(Array $validOptions, Array $options)
+    public function validateData(Array $options, Array $validOptions = [])
     {
         $resolver = new OptionsResolver();
-              
+
+        if (empty($validOptions)) {
+            $validOptions = array_keys(get_object_vars($this));    
+        }
+        
         $resolver->setDefined($validOptions); 
         $resolver->setRequired($validOptions);
         

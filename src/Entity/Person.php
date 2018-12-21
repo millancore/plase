@@ -3,10 +3,12 @@
 namespace Plase\Entity;
 
 use Plase\Value\EmailAddress;
-use Plase\OptionsValidator;
+use Plase\OptionsValidatorTrait;
 
 class Person
 {
+    use OptionsValidatorTrait;
+
     private $document;
     private $documentType;
     private $firstName;
@@ -22,12 +24,9 @@ class Person
 
     public function __construct(Array $data)
     {
-        $data = OptionsValidator::resolve(
-            array_keys(get_object_vars($this)),
-            $data
-        );
+        $validData = $this->validateData($data);
 
-        foreach ($data as $propierty => $value) {
+        foreach ($validData as $propierty => $value) {
             $this->{$propierty} = $value;
         }
 

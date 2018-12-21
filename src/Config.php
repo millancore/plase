@@ -4,6 +4,8 @@ namespace Plase;
 
 class Config implements ConfigInterface
 {
+    use OptionsValidatorTrait;
+
     private $login;
     private $tranKey;
     private $wsdl;
@@ -21,10 +23,7 @@ class Config implements ConfigInterface
 
     private function setOptions($options)
     {
-        $options = OptionsValidator::resolve(
-            array_keys(get_object_vars($this)),
-            $options
-        );
+        $options = $this->validateData($options);
 
         foreach ($options as $propierty => $value) {
             $this->{$propierty} = $value;
