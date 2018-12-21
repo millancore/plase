@@ -2,8 +2,6 @@
 
 namespace Plase;
 
-use Symfony\Component\OptionsResolver\OptionsResolver;
-
 class Config
 {
     private $login;
@@ -23,14 +21,10 @@ class Config
 
     private function setOptions($options)
     {
-        $resolver = new OptionsResolver();
-       
-        $validOptions = ['login', 'tranKey', 'wsdl', 'location'];
-       
-        $resolver->setDefined($validOptions);
-        $resolver->setRequired($validOptions);
-
-        $options = $resolver->resolve($options);
+        $options = OptionsValidator::resolve(
+            array_keys(get_object_vars($this)),
+            $options
+        );
 
         foreach ($options as $propierty => $value) {
             $this->{$propierty} = $value;
