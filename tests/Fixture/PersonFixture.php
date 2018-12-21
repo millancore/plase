@@ -1,18 +1,19 @@
 <?php
 
-use PHPUnit\Framework\TestCase;
+namespace Plase\Fixture;
+
 use Plase\Entity\Person;
 
-class PersonTest extends TestCase
+class PersonFixture
 {
-    public function testCreatePersonValidData()
-    {   
+    public static function generate()
+    {
         $faker = \Faker\Factory::create();
 
         $defaultValidTypes = ['CC', 'CE', 'TI', 'PPN','NIT','SSN'];
 
         $person = Person::fromArray([
-            'document' => 1067024123,
+            'document' => $faker->randomNumber,
             'documentType' => $defaultValidTypes[rand(0,5)],
             'firstName' => $faker->firstName,
             'lastName' => $faker->lastName,
@@ -26,19 +27,7 @@ class PersonTest extends TestCase
             'mobile' => $faker->phoneNumber
         ]);
 
-        var_dump($person->toArray());
-
-        $this->assertInstanceOf(
-            Person::class,
-            $person
-        );
-    }
-
-    public function testCreateWhitMissingData()
-    {
-        $this->expectException(InvalidArgumentException::class);
-        
-        $person = new Person([]);
+        return $person;
     }
     
 }

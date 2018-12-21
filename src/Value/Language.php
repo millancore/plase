@@ -19,6 +19,11 @@ class Language implements ValueObjectInterface
         
         $this->isoCode = $anIsoCode;
     }
+    
+    public static function fromString(String $anIsoCode)
+    {
+        return new self($anIsoCode);
+    }
 
     public function get()
     {

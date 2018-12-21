@@ -2,7 +2,7 @@
 
 namespace Plase;
 
-class Config
+class Config implements ConfigInterface
 {
     private $login;
     private $tranKey;
@@ -14,7 +14,7 @@ class Config
         $this->setOptions($options);    
     }
 
-    public static function create(Array $options)
+    public static function set(Array $options)
     {
         return new static($options);
     }

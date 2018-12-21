@@ -2,14 +2,39 @@
 
 namespace Plase\Entity;
 
-class Attribute 
+class Attribute
 {
     private $name;
     private $value;
 
     public function __construct(String $name, $value)
     {
+        $this->setName($name);
+        $this->setValue($value);
+    }
+
+    public static function fromArray(Array $data)
+    {
+        return new static($data['name'], $data['value']);
+    }
+
+    private function setName($name)
+    {
+        $name = trim($name);
+        if (!$name) {
+            throw new \InvalidArgumentException('Name can\'t be empty');
+        }
+
         $this->name = $name;
+    }
+
+    private function setValue($value)
+    {
+        $value = trim($value);
+        if (!$value) {
+            throw new \InvalidArgumentException('value can\'t be empty');
+        }
+
         $this->value = $value;
     }
 

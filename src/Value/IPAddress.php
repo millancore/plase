@@ -4,9 +4,9 @@ namespace Plase\Value;
 
 class IPAddress implements ValueObjectInterface
 {
-    private $ip;
+    private $ipAddress;
 
-    public function __construct(Int $ipAddress)
+    public function __construct($ipAddress)
     {
         $this->setIPAddress($ipAddress);
     }
@@ -17,11 +17,16 @@ class IPAddress implements ValueObjectInterface
             throw new \InvalidArgumentException('Invalid IP Address');
         }
 
-        $this->ip = $ip;
+        $this->ipAddress = $ipAddress;
+    }
+
+    public static function fromString($ipAddress)
+    {
+        return new self($ipAddress);
     }
 
     public function get()
     {
-        return $this->ip;
+        return $this->ipAddress;
     }
 }

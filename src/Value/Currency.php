@@ -20,6 +20,11 @@ class Currency implements ValueObjectInterface
         $this->isoCode = $anIsoCode;
     }
 
+    public static function fromString($anIsoCode)
+    {
+        return new self($anIsoCode);
+    }
+
     public function get()
     {
         return $this->isoCode;

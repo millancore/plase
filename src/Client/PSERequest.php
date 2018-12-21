@@ -2,7 +2,7 @@
 
 namespace Plase\Client;
 
-use Plase\TransactionBuilder;
+use Plase\RequestBuilder;
 
 class PSERequest
 {
@@ -24,12 +24,12 @@ class PSERequest
     private $userAgent;
     private $additionalData;
 
-    public function __construct(TransactionBuilder $builder)
+    public function __construct(RequestBuilder $builder)
     {
-        $rawResquestData = $builder->getRawTransaction();
+        $rawResquestData = $builder->getRawRequest();
         
-        foreach ($propierties as $propierty) {
-            $this->{$propierty} = $rawResquestData[$propierty];
+        foreach ($rawResquestData as $propierty => $value) {
+            $this->{$propierty} = $value;
         }
     }
 

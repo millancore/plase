@@ -23,5 +23,8 @@
         "psr-4": {
             "Plase\\": "src/"
         }
-    }
+    },
+    "autoload-dev": {
+        "psr-4": { "Plase\\Fixture\\": "tests/Fixture/" }
+      }
 }
