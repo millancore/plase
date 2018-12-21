@@ -5,7 +5,7 @@ namespace  Plase\Transport;
 use SoapClient;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class SoapTransport 
+class SoapTransport implements TransportInterface
 {
     private $version;
     private $client;
@@ -47,7 +47,12 @@ class SoapTransport
      
     public function client()
     {
-        return $client;
+        return $this->client;
     }
 
+    public function get()
+    {
+
+    }
+    
 }
