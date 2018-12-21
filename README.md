@@ -64,7 +64,7 @@ $builder = new RequestBuilder([
         'additionalData' => ['name' => 'code', 'value' => 312321]
 ]);
 
-$transaction = $plase->addTransaction(
+$response = $plase->addTransaction(
         $builder->getRequest()
     )->send();
 ```
