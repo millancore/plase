@@ -82,7 +82,15 @@ $request = RequestBuilder::create()
                 ...
                 ->getResquest();
 
-$transaction = $plase->addTransaction($request)->send();
+$response = $plase->addTransaction($request)->send();
+```
+
+### Get transaction's information from the object response
+
+```php
+
+$transaction = $plase->getTransaction($response->transactionID());
+
 ```
 
 ## Examples
