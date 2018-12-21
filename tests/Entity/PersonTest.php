@@ -12,7 +12,7 @@ class PersonTest extends TestCase
         $defaultValidTypes = ['CC', 'CE', 'TI', 'PPN','NIT','SSN'];
 
         $person = Person::fromArray([
-            'document' => $faker->randomNumber(12),
+            'document' => $faker->randomNumber,
             'documentType' => $defaultValidTypes[rand(0,5)],
             'firstName' => $faker->firstName,
             'lastName' => $faker->lastName,

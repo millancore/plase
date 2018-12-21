@@ -25,6 +25,11 @@
         }
     },
     "autoload-dev": {
-        "psr-4": { "Plase\\Fixture\\": "tests/Fixture/" }
-      }
+        "psr-4": {
+            "Plase\\Fixture\\": "tests/Fixture/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    }
 }
