@@ -2,7 +2,7 @@
 
 namespace Plase\Value;
 
-class Language
+class Language implements ValueObjectInterface
 {
     private $isoCode;
     
@@ -20,7 +20,7 @@ class Language
         $this->isoCode = $anIsoCode;
     }
 
-    public function isoCode()
+    public function get()
     {
         return $this->isoCode;
     }

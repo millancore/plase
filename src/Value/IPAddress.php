@@ -2,7 +2,7 @@
 
 namespace Plase\Value;
 
-class IPAddress
+class IPAddress implements ValueObjectInterface
 {
     private $ip;
 
@@ -14,13 +14,13 @@ class IPAddress
     private function setIPAddress($ipAddress)
     {
         if (!filter_var($ipAddress, FILTER_VALIDATE_IP)) {
-            throw new \InvalidArgumentException();
+            throw new \InvalidArgumentException('Invalid IP Address');
         }
 
         $this->ip = $ip;
     }
 
-    public function ip()
+    public function get()
     {
         return $this->ip;
     }

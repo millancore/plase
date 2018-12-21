@@ -2,7 +2,7 @@
 
 namespace Plase\Value;
 
-class EmailAddress
+class EmailAddress implements ValueObjectInterface
 {
     private $email;
 
@@ -14,13 +14,18 @@ class EmailAddress
     private function setEmail($email)
     {
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            throw new \InvalidArgumentException();
+            throw new \InvalidArgumentException('Ivalid format emailAddress');
         }
 
         $this->email = $email;
     }
 
-    public function email()
+    public static function fromString(String $email)
+    {
+        return new self($email);
+    }
+
+    public function get()
     {
         return $this->email;
     }
