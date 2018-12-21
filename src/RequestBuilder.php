@@ -10,6 +10,8 @@ use Plase\Entity\Person;
  */
 class RequestBuilder implements RequestBuilderInterface
 {
+    use OptionsValidatorTrait;
+
     private $rawRequest;
     private $fields;
 
@@ -42,10 +44,10 @@ class RequestBuilder implements RequestBuilderInterface
             'additionalData'
         ];
         
-        $data = OptionsValidator::resolve($this->fields, $data);
+        $validData = $this->validateData($data, $this->fields);
 
         foreach ($this->fields as $propierty) {
-            $this->{$propierty}($data[$propierty]);
+            $this->{$propierty}($validData[$propierty]);
         };
     }
 

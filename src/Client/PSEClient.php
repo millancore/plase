@@ -3,27 +3,32 @@
 namespace Plase\Client;
 
 use Plase\Transport\TransportInterface;
-use Plase\Auth\Authentication;
+use Plase\Auth\Authentication as Auth;
 
 class PSEClient
 {
+    private static $instance;
     private $transport;
-    private $auth;
 
-    public function __construct(
-        TransportInterface $transport,
-        Authentication $auth
-    )
+    protected function __construct(TransportInterface $transport)
     {
-        $this->transport = $transport->client();
-        $this->auth = $auth;
+        $this->transport = $transport->soapClient();
     }
 
-    public function getBankList()
+    public static function getInstance(TransportInterface $transport)
+    {
+       if (!self::$instance instanceof self) {
+          self::$instance = new static($transport);
+       }
+
+       return self::$instance;
+    }
+
+    public function getBankList(Auth $auth)
     {
         try {
            $bankList = $this->transport->getBankList(
-               ['auth' => $this->auth->getAuth()]
+               ['auth' => $auth->getAuth()]
            );
         } catch (\SoapFault $e) {
             throw $e;
@@ -32,27 +37,35 @@ class PSEClient
         return $bankList;
     }
 
-    public function createTransaction(PSERequest $request)
+    public function createTransaction(Auth $auth, PSERequest $request)
     {
         try {
-            $transaction = $this->transport->createTransaction(
+            $response = $this->transport->createTransaction(
                 [
-                    'auth' => $this->auth->getAuth(),
+                    'auth' => $auth->getAuth(),
                     'transaction' => $request->toArray()
                 ]
             );
-
         } catch (\SoapFault $e) {
             throw $e;
         }
 
-        return $transaction;
+        return PSEResponse::fromRawObject($response);
     }
 
-    public function getTransactionInformation(Transaction $transaction)
+    public function getTransactionInformation(Auth $auth, $transactionID)
     {
+        try {
+            $transaction = $this->transport->createTransaction(
+                [
+                    'auth' => $auth->getAuth(),
+                    'transactionID' => $transactionID
+                ]
+            );
+        } catch (\SoapFault $e) {
+            throw $e;
+        }
 
-        // Info
-        return new PSEResponse($response);
+        return PSEResponse::fromRawObject($response);
     }
 }

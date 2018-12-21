@@ -45,7 +45,7 @@ class SoapTransport implements TransportInterface
         $this->options = $resolver->resolve($options);
     }
      
-    public function client()
+    public function soapClient()
     {
         return $this->client;
     }
