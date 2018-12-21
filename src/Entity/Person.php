@@ -2,40 +2,56 @@
 
 namespace Plase\Entity;
 
-use Plase\Value\Document;
 use Plase\Value\EmailAddress;
-use Plase\Value\Address;
+use Plase\OptionsValidator;
 
 class Person
 {
     private $document;
+    private $documentType;
     private $firstName;
     private $lastName;
     private $company;
     private $emailAddress;
     private $address;
+    private $city;
+    private $province;
+    private $country;
     private $phone;
     private $mobile;
 
-    public function __construct(
-        Document $document,
-        String $firstName,
-        String $lastName,
-        String $company,
-        EmailAddress $emailAddress,
-        Address $address,
-        String $phone,
-        String $mobile
-    )
+    public function __construct(Array $data)
     {
-        $this->document = $document;
-        $this->firstName = $firstName;
-        $this->lastName = $lastName;
-        $this->$company = $company;
-        $this->emailAddress = $emailAddress;
-        $this->address = $address;
-        $this->phone = $phone;
-        $this->mobile = $mobile;
+        $data = OptionsValidator::resolve(
+            array_keys(get_object_vars($this)),
+            $data
+        );
+
+        foreach ($data as $propierty => $value) {
+            $this->{$propierty} = $value;
+        }
+
+        $this->setDocumentType($data['documentType']);
+        $this->setEmailAddress($data['emailAddress']);
+    }
+
+    public static function fromArray(Array $data)
+    {
+        return new static($data);
+    }
+
+    private function setDocumentType($documentType)
+    {
+        if (!in_array($documentType, ['CC', 'CE', 'TI', 'PPN','NIT','SSN'])) {
+            throw new \InvalidArgumentException('Invalid DocumentType');
+        }
+
+        $this->documentType = $documentType;
+    }
+
+    private function setEmailAddress($emailAddress)
+    {
+        $this->emailAddress = EmailAddress::fromString($emailAddress)->get();
     }
 
     public function toArray()

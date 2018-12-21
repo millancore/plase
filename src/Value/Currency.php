@@ -2,7 +2,7 @@
 
 namespace Plase\Value;
 
-class Currency
+class Currency implements ValueObjectInterface
 {
     private $isoCode;
     
@@ -20,7 +20,7 @@ class Currency
         $this->isoCode = $anIsoCode;
     }
 
-    public function isoCode()
+    public function get()
     {
         return $this->isoCode;
     }
