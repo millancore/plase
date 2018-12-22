@@ -35,7 +35,7 @@ class RequestBuilderTest extends TestCase
 
         $this->assertInstanceOf(
             PSERequest::class,
-            $builder->request()
+            $builder->getRequest()
         );
     }
 
