@@ -67,7 +67,7 @@ $builder = new RequestBuilder([
 $bankList = $plase->getBankList();
 
 /** Get PSEResponse */
-$pseResponse = $plase->createTransaction($builder->request());
+$pseResponse = $plase->createTransaction($builder->getRequest());
 
 /** Get Transaction Entity */
 $transaction = $plase->getTransaction($pseResponse->transactionID());

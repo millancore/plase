@@ -126,21 +126,25 @@ class RequestBuilder implements RequestBuilderInterface
     public function totalAmount(Float $totalAmount)
     {
         $this->rawRequest['totalAmount'] = $totalAmount;
+        return $this;
     }
 
     public function taxAmount(Float $taxAmount)
     {
         $this->rawRequest['taxAmount'] = $taxAmount;
+        return $this;
     }
 
     public function devolutionBase(Float $devolutionBase)
     {
         $this->rawRequest['devolutionBase'] = $devolutionBase;
+        return $this;
     }
 
     public function tipAmount(Float $tipAmount)
     {
         $this->rawRequest['tipAmount'] = $tipAmount;
+        return $this;
     }
 
     public function payer(Person $payer)
@@ -192,7 +196,7 @@ class RequestBuilder implements RequestBuilderInterface
         return $this->rawRequest;
     }
 
-    public function request()
+    public function getRequest()
     {
         return new PSERequest($this);
     }
