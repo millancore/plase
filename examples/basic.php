@@ -63,9 +63,11 @@ $builder = new RequestBuilder([
     'additionalData' => ['name' => 'code', 'value' => 312321]
 ]);
 
+/** Get Banks Collection */
+#$bankList = $plase->getBankList();
 
-$pseResponse = $plase->createTransaction($builder->request());
+/** Get PSEResponse */
+#$pseResponse = $plase->createTransaction($builder->request());
 
-$transaction = $plase->getTransaction($pseResponse->transactionID());
-
-var_dump($transaction);
+/** Get Transaction Entity */
+#$transaction = $plase->getTransaction($pseResponse->transactionID());

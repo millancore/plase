@@ -2,6 +2,8 @@
 
 namespace Plase;
 
+use Plase\Support\OptionsValidatorTrait;
+
 class Config implements ConfigInterface
 {
     use OptionsValidatorTrait;

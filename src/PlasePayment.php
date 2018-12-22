@@ -7,6 +7,8 @@ use Plase\Client\PSERequest;
 use Plase\Client\PSEResponse;
 use Plase\Entity\Transaction;
 use Plase\Auth\Authentication;
+use Plase\Support\BankFactory;
+use Plase\Support\CollectionBank;
 use Plase\Transport\SoapTransport;
 
 class PlasePayment
@@ -59,7 +61,9 @@ class PlasePayment
             ]
          );
 
-        return $bankList;
+        $bankFactory = new BankFactory(new CollectionBank());
+
+        return $bankFactory->makefromList($bankList);
     }
 
     public function createTransaction(PSERequest $request)

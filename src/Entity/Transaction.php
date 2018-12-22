@@ -2,7 +2,7 @@
 
 namespace Plase\Entity;
 
-use Plase\OptionsValidatorTrait;
+use Plase\Support\OptionsValidatorTrait;
 
 class Transaction
 {

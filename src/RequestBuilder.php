@@ -2,9 +2,9 @@
 
 namespace Plase;
 
-use Plase\Client\PSERequest;
 use Plase\Entity\Person;
-
+use Plase\Client\PSERequest;
+use Plase\Support\OptionsValidatorTrait;
 /**
  * Builder PSETransactionRequest
  */

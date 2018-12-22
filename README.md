@@ -39,6 +39,14 @@ $payer = new Person([
         'mobile' => '212-474-4638 x541',
 ]);
 ```
+### Get a collection Banks
+
+```php
+/** Get Banks Collection */
+$bankList = $plase->getBankList();
+
+```
+
 ### Create a new Request in one step
 
 ```php
@@ -64,6 +72,7 @@ $builder = new RequestBuilder([
         'additionalData' => ['name' => 'code', 'value' => 312321]
 ]);
 
+/** Get PSEResponse */
 $response = $plase->createTransaction($builder->getRequest());
 ```
 
@@ -78,17 +87,17 @@ $request = RequestBuilder::create()
                 ->returnURL('https://gateway.com/payment')
                 ->payer(Object Person)
                 ...
-                ->getResquest();
+                ->getRequest();
 
+/** Get PSEResponse */
 $response = $plase->createTransaction($request);
 ```
 
 ### Get transaction's information from response object
 
 ```php
-
+/** Get Transaction Entity */
 $transaction = $plase->getTransaction($response->transactionID());
-
 ```
 
 ## Examples

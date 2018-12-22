@@ -3,7 +3,7 @@
 namespace Plase\Entity;
 
 use Plase\Value\EmailAddress;
-use Plase\OptionsValidatorTrait;
+use Plase\Support\OptionsValidatorTrait;
 
 class Person
 {

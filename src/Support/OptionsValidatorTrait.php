@@ -1,6 +1,6 @@
 <?php
 
-namespace Plase;
+namespace Plase\Support;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
