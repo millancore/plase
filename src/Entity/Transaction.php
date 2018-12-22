@@ -24,11 +24,17 @@ class Transaction
 
     public function __construct(Array $data)
     {
-        $validData = validateData($data);
+        $validData = $this->validateData($data);
 
         foreach ($validData as $propierty => $value) {
             $this->{$propierty} = $value;
         }
+    }
+
+    public static function fromRawObject($rawObjectResponse)
+    {
+        $data = $rawObjectResponse->getTransactionInformationResult;
+        return new static(get_object_vars($data));
     }
 
     public function transactionID()

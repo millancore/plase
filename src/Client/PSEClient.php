@@ -17,55 +17,21 @@ class PSEClient
 
     public static function getInstance(TransportInterface $transport)
     {
-       if (!self::$instance instanceof self) {
-          self::$instance = new static($transport);
-       }
+        if (!self::$instance instanceof self) {
+            self::$instance = new static($transport);
+        }
 
-       return self::$instance;
+        return self::$instance;
     }
 
-    public function getBankList(Auth $auth)
+    public function request(String $method, Array $params)
     {
         try {
-           $bankList = $this->transport->getBankList(
-               ['auth' => $auth->getAuth()]
-           );
+            $response = $this->transport->__soapCall($method, [$params]);
         } catch (\SoapFault $e) {
             throw $e;
         }
 
-        return $bankList;
-    }
-
-    public function createTransaction(Auth $auth, PSERequest $request)
-    {
-        try {
-            $response = $this->transport->createTransaction(
-                [
-                    'auth' => $auth->getAuth(),
-                    'transaction' => $request->toArray()
-                ]
-            );
-        } catch (\SoapFault $e) {
-            throw $e;
-        }
-
-        return PSEResponse::fromRawObject($response);
-    }
-
-    public function getTransactionInformation(Auth $auth, $transactionID)
-    {
-        try {
-            $transaction = $this->transport->createTransaction(
-                [
-                    'auth' => $auth->getAuth(),
-                    'transactionID' => $transactionID
-                ]
-            );
-        } catch (\SoapFault $e) {
-            throw $e;
-        }
-
-        return PSEResponse::fromRawObject($response);
+        return $response;
     }
 }

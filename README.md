@@ -64,9 +64,7 @@ $builder = new RequestBuilder([
         'additionalData' => ['name' => 'code', 'value' => 312321]
 ]);
 
-$response = $plase->addTransaction(
-        $builder->getRequest()
-    )->send();
+$response = $plase->createTransaction($builder->getRequest());
 ```
 
 ### Create a new Request step by step
@@ -82,10 +80,10 @@ $request = RequestBuilder::create()
                 ...
                 ->getResquest();
 
-$response = $plase->addTransaction($request)->send();
+$response = $plase->createTransaction($request);
 ```
 
-### Get transaction's information from the object response
+### Get transaction's information from response object
 
 ```php
 

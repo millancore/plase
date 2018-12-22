@@ -63,6 +63,9 @@ $builder = new RequestBuilder([
     'additionalData' => ['name' => 'code', 'value' => 312321]
 ]);
 
-$pseResponse = $plase->addTransaction($builder->request())->send();
 
-var_dump($pseResponse);
+$pseResponse = $plase->createTransaction($builder->request());
+
+$transaction = $plase->getTransaction($pseResponse->transactionID());
+
+var_dump($transaction);
