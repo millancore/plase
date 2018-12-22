@@ -6,5 +6,5 @@ interface RequestBuilderInterface
 {
     public function getRawRequest();
 
-    public function request();
+    public function getRequest();
 }
