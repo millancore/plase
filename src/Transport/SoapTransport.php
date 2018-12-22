@@ -48,11 +48,5 @@ class SoapTransport implements TransportInterface
     public function soapClient()
     {
         return $this->client;
-    }
-
-    public function get()
-    {
-
-    }
-    
+    }    
 }

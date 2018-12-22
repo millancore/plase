@@ -4,5 +4,5 @@ namespace Plase\Transport;
 
 interface TransportInterface
 {
-    public function get();
+    public function soapClient();
 }

@@ -7,21 +7,11 @@ use Plase\Auth\Authentication as Auth;
 
 class PSEClient
 {
-    private static $instance;
     private $transport;
 
-    protected function __construct(TransportInterface $transport)
+    public function __construct(TransportInterface $transport)
     {
         $this->transport = $transport->soapClient();
-    }
-
-    public static function getInstance(TransportInterface $transport)
-    {
-        if (!self::$instance instanceof self) {
-            self::$instance = new static($transport);
-        }
-
-        return self::$instance;
     }
 
     public function request(String $method, Array $params)

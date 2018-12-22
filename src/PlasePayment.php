@@ -20,8 +20,8 @@ class PlasePayment
     
     public function __construct(ConfigInterface $config)
     {
-        $this->transaction = null;
         $this->config = $config;
+        $this->setClient();
         $this->setAuth($config);
     }
 
@@ -43,9 +43,9 @@ class PlasePayment
         return $this->auth;
     }
 
-    public function client(array $options = [])
+    public function setClient(array $options = [])
     {
-        $this->pseClient = PSEClient::getInstance(
+        $this->pseClient = new PSEClient(
             new SoapTransport($this->config->wsdl(), $options)
         );
 
@@ -54,7 +54,7 @@ class PlasePayment
 
     public function getBankList()
     {
-        $bankList = $this->client()->request(
+        $bankList = $this->pseClient->request(
             'getBankList',
             [
                 'auth' => $this->auth->getAuth()
@@ -68,7 +68,7 @@ class PlasePayment
 
     public function createTransaction(PSERequest $request)
     {
-        $pseResponse = $this->client()->request(
+        $pseResponse = $this->pseClient->request(
             'createTransaction',
             [
                 'auth' => $this->auth->getAuth(),
@@ -81,7 +81,7 @@ class PlasePayment
 
     public function getTransaction($transactionID)
     {
-        $transaction = $this->client()->request(
+        $transaction = $this->pseClient->request(
             'getTransactionInformation',
             [
                 'auth' => $this->auth->getAuth(),

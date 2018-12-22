@@ -7,10 +7,10 @@ use Plase\RequestBuilder;
 use Plase\Entity\Person;
 
 $plase = PlasePayment::fromConfig([
-    'login' => '6dd490faf9cb87a9862245da41170ff2',
-    'tranKey' => '024h1IlD',
-    'wsdl' => 'https://test.placetopay.com/soap/pse/?wsdl',
-    'location' => 'https://test.placetopay.com/soap/pse'
+    'login' => 'LOGIN',
+    'tranKey' => 'TRANKEY',
+    'wsdl' => 'WSDL_ENPOINT',
+    'location' => 'ENDPOINT'
 ]);
 
 $payer = $buyer = new Person([
@@ -63,11 +63,11 @@ $builder = new RequestBuilder([
     'additionalData' => ['name' => 'code', 'value' => 312321]
 ]);
 
-/** Get Banks Collection */
-#$bankList = $plase->getBankList();
+/** Get CollectionBank */
+$bankList = $plase->getBankList();
 
 /** Get PSEResponse */
-#$pseResponse = $plase->createTransaction($builder->request());
+$pseResponse = $plase->createTransaction($builder->request());
 
 /** Get Transaction Entity */
-#$transaction = $plase->getTransaction($pseResponse->transactionID());
+$transaction = $plase->getTransaction($pseResponse->transactionID());
