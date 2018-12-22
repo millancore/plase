@@ -3,7 +3,7 @@
 use PHPUnit\Framework\TestCase;
 use Plase\Value\EmailAddress;
 
-class EmailTest extends TestCase
+class EmailAddressTest extends TestCase
 {
     public function testCreatedFromValidEmailAddress()
     {

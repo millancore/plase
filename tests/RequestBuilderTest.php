@@ -37,7 +37,6 @@ class RequestBuilderTest extends TestCase
             PSERequest::class,
             $builder->request()
         );
-        
     }
 
 }
