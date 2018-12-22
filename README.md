@@ -39,12 +39,11 @@ $payer = new Person([
         'mobile' => '212-474-4638 x541',
 ]);
 ```
-### Get a collection Banks
+### Get collection of banks
 
 ```php
-/** Get Banks Collection */
+/** Get CollectionBank */
 $bankList = $plase->getBankList();
-
 ```
 
 ### Create a new Request in one step
