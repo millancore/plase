@@ -17,12 +17,25 @@ class RequestBuilder implements RequestBuilderInterface
 
     public function __construct(array $data = [])
     {
+        $this->initFields();
+
         if (!empty($data)) {
             $this->setData($data);
         }
+
+
     }
 
     private function setData($data)
+    {   
+        $validData = $this->validateData($data, $this->fields);
+
+        foreach ($this->fields as $propierty) {
+            $this->{$propierty}($validData[$propierty]);
+        };
+    }
+
+    private function initFields()
     {
         $this->fields = [
             'bankCode',
@@ -43,12 +56,15 @@ class RequestBuilder implements RequestBuilderInterface
             'userAgent',
             'additionalData'
         ];
-        
-        $validData = $this->validateData($data, $this->fields);
+    }
 
-        foreach ($this->fields as $propierty) {
-            $this->{$propierty}($validData[$propierty]);
-        };
+    private function validMissingArguments()
+    {
+        foreach ($this->fields as $field) {
+            if (is_null($this->rawRequest[$field])) {
+                throw new \InvalidArgumentException("This argument $field can't be null");
+            }
+        }
     }
 
     public static function create()
@@ -198,6 +214,7 @@ class RequestBuilder implements RequestBuilderInterface
 
     public function getRequest()
     {
+        $this->validMissingArguments();
         return new PSERequest($this);
     }
 }
